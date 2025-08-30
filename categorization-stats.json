@@ -1,0 +1,28 @@
+{
+  "totalImages": 14,
+  "categoryCounts": {
+    "long-frock": 9,
+    "lehenga": 5
+  },
+  "lastUpdated": "2025-08-20T18:22:25.954Z",
+  "confidenceStats": {
+    "long-frock": {
+      "total": 141.66666666666663,
+      "count": 9,
+      "avg": 15.740740740740737
+    },
+    "lehenga": {
+      "total": 35.71428571428571,
+      "count": 5,
+      "avg": 7.1428571428571415
+    }
+  },
+  "seasonalDistribution": {
+    "all-season": 14
+  },
+  "colorDistribution": {
+    "versatile": 10,
+    "bridal": 3,
+    "party": 1
+  }
+}

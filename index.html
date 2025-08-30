@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JRP Courteries - Boutique Fashion</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Header -->
+        <header class="header">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <h1 class="logo">JRP COURTERIES</h1>
+                    <p class="tagline">Timeless Style, Modern Grace</p>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#arrivals" class="nav-link">New Arrivals</a></li>
+                    <li><a href="#collections" class="nav-link">Collections</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search for your perfect outfit..." class="search-input" id="search-input">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    <div class="cart-container" id="cart-container" onclick="toggleCart()">
+                        <i class="fas fa-shopping-bag cart-icon"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h2 class="hero-title">Discover Your Unique Story</h2>
+                <p class="hero-description">
+                    From traditional lehengas to contemporary evening wear, explore our curated collection of exquisite fashion that celebrates your individuality and timeless elegance.
+                </p>
+                <button class="cta-button" onclick="scrollToCollection()">
+                    Explore Collection
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card">
+                    <i class="fas fa-gem"></i>
+                    <span>Premium Quality</span>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-palette"></i>
+                    <span>Unique Designs</span>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Fast Delivery</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Filter Section -->
+        <section class="product-section" id="collections">
+            <div class="section-header">
+                <h3>Our Featured Collection</h3>
+                <p>Handpicked designs for the discerning fashion enthusiast</p>
+            </div>
+
+            <!-- Enhanced Filter Controls -->
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label>Category:</label>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All Items</button>
+                        <button class="filter-btn" data-filter="lehengas">Lehengas</button>
+                        <button class="filter-btn" data-filter="kurtis">Kurtis</button>
+                        <button class="filter-btn" data-filter="sarees">Sarees</button>
+                        <button class="filter-btn" data-filter="gowns">Gowns</button>
+                        <button class="filter-btn" data-filter="dresses">Dresses</button>
+                        <button class="filter-btn" data-filter="dupattas">Dupattas</button>
+                        <button class="filter-btn" data-filter="jewelry">Jewelry</button>
+                        <button class="filter-btn" data-filter="footwear">Footwear</button>
+                        <button class="filter-btn" data-filter="accessories">Accessories</button>
+                    </div>
+                </div>
+
+                <div class="sort-group">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select" class="sort-dropdown">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="newest">Newest First</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-grid" id="productGrid">
+                <!-- Sample product cards -->
+                <div class="product-card" data-category="lehengas">
+                    <div class="product-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-image"></i>
+                            <span>Elegant Lehenga</span>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn">
+                                <i class="fas fa-eye"></i>
+                                Quick View
+                            </button>
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h4>Traditional Silk Lehenga</h4>
+                        <p class="product-price">₹12,999</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(24 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more sample products -->
+                <div class="product-card" data-category="kurtis">
+                    <div class="product-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-image"></i>
+                            <span>Designer Kurti</span>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn">
+                                <i class="fas fa-eye"></i>
+                                Quick View
+                            </button>
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h4>Embroidered Cotton Kurti</h4>
+                        <p class="product-price">₹2,499</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(18 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More product cards -->
+                <div class="product-card" data-category="dresses">
+                    <div class="product-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-image"></i>
+                            <span>Evening Dress</span>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn">
+                                <i class="fas fa-eye"></i>
+                                Quick View
+                            </button>
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h4>Elegant Evening Gown</h4>
+                        <p class="product-price">₹8,999</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(32 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="sarees">
+                    <div class="product-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-image"></i>
+                            <span>Silk Saree</span>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view-btn">
+                                <i class="fas fa-eye"></i>
+                                Quick View
+                            </button>
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h4>Banarasi Silk Saree</h4>
+                        <p class="product-price">₹15,999</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(28 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shopping Cart Sidebar -->
+        <div class="cart-sidebar" id="cartSidebar">
+            <div class="cart-header">
+                <h3>Your Shopping Cart</h3>
+                <button class="close-cart" onclick="toggleCart()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total: ₹<span id="cartTotal">0.00</span></span>
+                </div>
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- Overlay for cart -->
+        <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
+        <div class="loading-spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
