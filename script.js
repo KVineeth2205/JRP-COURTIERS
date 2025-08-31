@@ -115,7 +115,7 @@ class UI {
             closeCartBtn: document.getElementById('close-cart-btn'),
             overlay: document.getElementById('overlay'),
             toast: document.getElementById('toast'),
-            ctaButton: document.querySelector('.cta-button'),
+            ctaButton: document.querySelector('.cta-button')
         };
         this.setupEventListeners();
     }
@@ -149,7 +149,9 @@ class UI {
 
     static applyTheme(theme) {
         document.body.classList.toggle('dark-mode', theme === 'dark');
-        this.elements.themeSwitcher.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        if (this.elements.themeSwitcher) {
+            this.elements.themeSwitcher.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
     }
 
     static toggleCartSidebar(open) {
@@ -158,6 +160,7 @@ class UI {
     }
 
     static renderProducts(products) {
+        if (!this.elements.productGrid) return;
         this.elements.productGrid.innerHTML = products.map(p => this.createProductCard(p)).join('');
         this.setupProductCardListeners();
     }
@@ -195,12 +198,17 @@ class UI {
     }
 
     static updateCartUI() {
-        this.elements.cartCount.textContent = appState.getCartCount();
-        this.elements.cartTotal.textContent = `₹${appState.getCartTotal().toLocaleString()}`;
+        if (this.elements.cartCount) {
+            this.elements.cartCount.textContent = appState.getCartCount();
+        }
+        if (this.elements.cartTotal) {
+            this.elements.cartTotal.textContent = `₹${appState.getCartTotal().toLocaleString()}`;
+        }
         this.renderCartItems();
     }
 
     static renderCartItems() {
+        if (!this.elements.cartItems) return;
         if (appState.cart.length === 0) {
             this.elements.cartItems.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div>`;
             return;
@@ -244,6 +252,7 @@ class UI {
     }
 
     static showToast(message) {
+        if (!this.elements.toast) return;
         this.elements.toast.textContent = message;
         this.elements.toast.classList.add('show');
         setTimeout(() => this.elements.toast.classList.remove('show'), CONFIG.TOAST_DURATION);
