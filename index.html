@@ -43,6 +43,7 @@
         </header>
 
         <section class="hero" id="home">
+            <div class="hero-overlay"></div>
             <div class="hero-content" data-aos="fade-right">
                 <h2 class="hero-title">Discover Your Unique Story</h2>
                 <p class="hero-description">
@@ -52,20 +53,6 @@
                     Explore Collection
                     <i class="fas fa-arrow-right"></i>
                 </button>
-            </div>
-            <div class="hero-visual" data-aos="fade-left">
-                <div class="floating-card">
-                    <i class="fas fa-gem"></i>
-                    <span>Premium Quality</span>
-                </div>
-                <div class="floating-card">
-                    <i class="fas fa-palette"></i>
-                    <span>Unique Designs</span>
-                </div>
-                <div class="floating-card">
-                    <i class="fas fa-shipping-fast"></i>
-                    <span>Fast Delivery</span>
-                </div>
             </div>
         </section>
 
@@ -126,7 +113,7 @@
     </p>
 </div>
                 <div class="contact-map" data-aos="fade-left">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.590794212219!2d78.59902531487763!3d17.4795059880242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9c29d0000001%3A0x7a2d7b8a22144b82!2sSV%20Nagar%2C%20Nagaram%2C%20Hyderabad%2C%20Telangana%20500083!5e0!3m2!1sen!2sin!4v1661872192143!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.511522854644!2d78.5992658148777!3d17.482950988021!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9c0f3a9e3e3b%3A0x2d9e9e1b2e1b1b1b!2sManipal%20Nilayam%2C%20Rd%20Number%206%2C%20SV%20Nagar%2C%20Nagaram%2C%20Hyderabad%2C%20Telangana%20500083%2C%20India!5e0!3m2!1sen!2sus!4v1630454743241!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </section>
@@ -180,6 +167,15 @@
 
         <div class="overlay" id="overlay"></div>
     </div>
+
+    <div class="modal" id="quick-view-modal">
+        <div class="modal-content">
+            <button class="close-modal-btn" id="close-modal-btn"><i class="fas fa-times"></i></button>
+            <div id="quick-view-body"></div>
+        </div>
+    </div>
+
+    <button id="back-to-top-btn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 
     <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
