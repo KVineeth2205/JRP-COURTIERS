@@ -136,8 +136,9 @@ class UI {
             navLinks: document.querySelectorAll('.nav-link'),
             quickViewModal: document.getElementById('quick-view-modal'),
             quickViewBody: document.getElementById('quick-view-body'),
-            closeModalBtn: document.getElementById('close-modal-btn'),
-            backToTopBtn: document.getElementById('back-to-top-btn')
+            closeModalBtn: document.getElementById('close-quick-view-btn'),
+            backToTopBtn: document.getElementById('back-to-top-btn'),
+            checkoutBtn: document.querySelector('.checkout-btn')
         };
         this.setupEventListeners();
     }
@@ -182,6 +183,10 @@ class UI {
 
         this.elements.closeModalBtn?.addEventListener('click', () => this.toggleQuickViewModal(false));
         this.elements.backToTopBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        
+        this.elements.checkoutBtn?.addEventListener('click', () => {
+            this.showToast('This feature is coming soon!');
+        });
 
         window.addEventListener('scroll', throttle(() => {
             this.elements.header?.classList.toggle('scrolled', window.scrollY > 50);
@@ -274,7 +279,6 @@ class UI {
     static toggleQuickViewModal(open) {
         this.elements.quickViewModal.classList.toggle('open', open);
     }
-
 
     static updateCartUI() {
         if (this.elements.cartCount) {
@@ -394,57 +398,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         offset: 50,
     });
 });
-// ... (keep the top of the file the same) ...
-
-// ===== UI MANAGEMENT =====
-class UI {
-    static elements = {};
-
-    static initialize() {
-        this.elements = {
-            // ... (other elements)
-            checkoutBtn: document.querySelector('.checkout-btn'),
-            paymentModal: document.getElementById('payment-modal'),
-            closePaymentBtn: document.getElementById('close-payment-btn'),
-            paymentForm: document.getElementById('payment-form')
-        };
-        this.setupEventListeners();
-    }
-
-    static setupEventListeners() {
-        // ... (other event listeners)
-
-        this.elements.closePaymentBtn?.addEventListener('click', () => this.togglePaymentModal(false));
-        this.elements.checkoutBtn?.addEventListener('click', () => {
-            if (appState.getCartTotal() > 0) {
-                this.togglePaymentModal(true);
-            } else {
-                this.showToast('Your cart is empty.');
-            }
-        });
-        
-        this.elements.paymentForm?.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.handlePaymentSuccess();
-        });
-    }
-
-    // ... (other UI methods)
-
-    static togglePaymentModal(open) {
-        this.elements.paymentModal.classList.toggle('open', open);
-    }
-
-    static handlePaymentSuccess() {
-        this.togglePaymentModal(false);
-        this.showToast('Payment successful! Thank you for your order.');
-        
-        // Clear the cart
-        appState.cart = [];
-        appState.saveCart();
-        this.updateCartUI();
-    }
-}
-
-
-// ... (keep the rest of the file the same) ...
