@@ -646,14 +646,26 @@ class API {
         try {
             UI.showLoading('Loading products...');
             
-            const response = await fetch(`${CONFIG.API_BASE_URL}/products`);
+            const response = await fetch('image-categories.json');
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
-            const products = await response.json();
-            return products;
+            const categories = await response.json();
+            return Object.keys(categories).map(key => {
+                const product = categories[key];
+                return {
+                    id: key,
+                    name: product.displayName,
+                    category: product.category,
+                    price: product.suggestedPriceRange.min,
+                    description: product.description,
+                    image: product.imageUrl,
+                    rating: 4.5, // Default rating
+                    reviews: Math.floor(Math.random() * 50) // Default reviews
+                };
+            });
         } catch (error) {
             console.error('Error fetching products:', error);
             UI.showToast('Error loading products. Please try again.', 'error');
@@ -663,6 +675,7 @@ class API {
         }
     }
 }
+
 
 // ===== UTILITY FUNCTIONS =====
 function debounce(func, wait) {
@@ -693,292 +706,16 @@ function throttle(func, limit) {
 // ===== INITIALIZATION =====
 let appState;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Initialize app state
     appState = new AppState();
     appState.loadCart();
 
     // Initialize UI
     UI.initialize();
-
-    // Initialize products with hardcoded data
-    appState.allProducts = [
-        // Lehengas
-        {
-            id: '1',
-            name: 'Lehenga Sapphire Royale',
-            category: 'lehengas',
-            price: 28999,
-            description: 'Exquisite sapphire blue lehenga with royal embroidery and premium silk fabric. Perfect for grand celebrations and wedding ceremonies.',
-            image: 'images/Lehenga Sapphire Royale.jpg',
-            rating: 4.8,
-            reviews: 32
-        },
-        {
-            id: '2',
-            name: 'Lehenga Golden Marigold Majesty',
-            category: 'lehengas',
-            price: 32499,
-            description: 'Majestic golden marigold lehenga with intricate zari work and traditional motifs. A stunning choice for bridal wear.',
-            image: 'images/Lehenga Golden Marigold Majesty.jpg',
-            rating: 4.9,
-            reviews: 28
-        },
-        {
-            id: '3',
-            name: 'Lehenga Imperial Scarlet Majesty',
-            category: 'lehengas',
-            price: 35999,
-            description: 'Imperial scarlet lehenga with bold red tones and majestic embroidery. Perfect for the bride who wants to make a statement.',
-            image: 'images/Lehenga Imperial Scarlet Majesty.jpg',
-            rating: 4.7,
-            reviews: 45
-        },
-        {
-            id: '4',
-            name: 'Lehenga Starry Maroon Bridal Glamour',
-            category: 'lehengas',
-            price: 38999,
-            description: 'Starry maroon bridal lehenga with celestial embroidery and glamorous detailing. Ideal for the modern bride.',
-            image: 'images/Lehenga Starry Maroon Bridal Glamour.jpg',
-            rating: 4.9,
-            reviews: 38
-        },
-        {
-            id: '5',
-            name: 'Lehenga Crimson Queen Anarkali',
-            category: 'lehengas',
-            price: 27499,
-            description: 'Crimson queen anarkali style lehenga with regal embroidery and flowing silhouette. Perfect for royal celebrations.',
-            image: 'images/Lehenga Crimson Queen Anarkali.jpg',
-            rating: 4.6,
-            reviews: 26
-        },
-        {
-            id: '6',
-            name: 'Lehenga Royal Mocha Elegance',
-            category: 'lehengas',
-            price: 29999,
-            description: 'Royal mocha lehenga with elegant brown tones and sophisticated embroidery. A timeless choice for special occasions.',
-            image: 'images/Lehenga Royal Mocha Elegance.jpg',
-            rating: 4.5,
-            reviews: 22
-        },
-        // Long Dresses
-        {
-            id: '7',
-            name: 'Long Dress Deep Plum Stardust',
-            category: 'dresses',
-            price: 15999,
-            description: 'Deep plum long dress with stardust embellishments and flowing silhouette. Perfect for evening parties and celebrations.',
-            image: 'images/Long Dress Deep Plum Stardust.jpg',
-            rating: 4.4,
-            reviews: 19
-        },
-        {
-            id: '8',
-            name: 'Long Dress Moonlit Wisteria',
-            category: 'dresses',
-            price: 12999,
-            description: 'Moonlit wisteria long dress with ethereal purple tones and delicate floral patterns. Ideal for romantic evenings.',
-            image: 'images/Long Dress Moonlit Wisteria.jpg',
-            rating: 4.3,
-            reviews: 15
-        },
-        {
-            id: '9',
-            name: 'Long Dress Azure Enchantress',
-            category: 'dresses',
-            price: 17999,
-            description: 'Azure enchantress long dress with mesmerizing blue tones and enchanting embroidery. Perfect for magical moments.',
-            image: 'images/Long Dress Azure Enchantress.jpg',
-            rating: 4.6,
-            reviews: 24
-        },
-        {
-            id: '10',
-            name: 'Long Dress Emerald Elegance',
-            category: 'dresses',
-            price: 8999,
-            description: 'Emerald elegance long dress with sophisticated green tones and elegant detailing. A classic choice for formal events.',
-            image: 'images/Long Dress Emerald Elegance.jpg',
-            rating: 4.2,
-            reviews: 12
-        },
-        {
-            id: '11',
-            name: 'Long Dress Blush Petals Reverie',
-            category: 'dresses',
-            price: 10999,
-            description: 'Blush petals reverie long dress with soft pink tones and dreamy floral patterns. Perfect for spring celebrations.',
-            image: 'images/Long Dress Blush Petals Reverie.jpg',
-            rating: 4.4,
-            reviews: 18
-        },
-        {
-            id: '12',
-            name: 'Long Dress Celestial Grace',
-            category: 'dresses',
-            price: 18999,
-            description: 'Celestial grace long dress with heavenly embroidery and graceful silhouette. Ideal for divine celebrations.',
-            image: 'images/Long Dress Celestial Grace.jpg',
-            rating: 4.7,
-            reviews: 31
-        },
-        {
-            id: '13',
-            name: 'Long Dress Rosé Stardust',
-            category: 'dresses',
-            price: 14999,
-            description: 'Rosé stardust long dress with shimmering pink tones and celestial embellishments. Perfect for starry nights.',
-            image: 'images/Long Dress Rosé Stardust.jpg',
-            rating: 4.5,
-            reviews: 21
-        },
-        {
-            id: '14',
-            name: 'Long Dress Golden Sunshine Radiance',
-            category: 'dresses',
-            price: 11999,
-            description: 'Golden sunshine radiance long dress with warm golden tones and radiant embroidery. Perfect for sunny celebrations.',
-            image: 'images/Long Dress Golden Sunshine Radiance.jpg',
-            rating: 4.3,
-            reviews: 16
-        },
-        // Sarees
-        {
-            id: '15',
-            name: 'Bridal Collection Bottle Green Saree',
-            category: 'sarees',
-            price: 22499,
-            description: 'Elegant bottle green bridal saree with traditional embroidery and premium silk fabric. Perfect for traditional ceremonies.',
-            image: 'images/Bridal Collection Bottle Green Color Pure….jpg',
-            rating: 4.8,
-            reviews: 29
-        },
-        {
-            id: '16',
-            name: 'Lavender Silk Saree',
-            category: 'sarees',
-            price: 15999,
-            description: 'Delicate lavender silk saree with subtle embroidery and graceful drape. Ideal for afternoon functions and celebrations.',
-            image: 'images/Lavender Saree.jpg',
-            rating: 4.5,
-            reviews: 23
-        },
-        {
-            id: '17',
-            name: 'White Bridal Saree',
-            category: 'sarees',
-            price: 18999,
-            description: 'Pure white bridal saree with intricate gold work and traditional motifs. A classic choice for wedding ceremonies.',
-            image: 'images/White Bridal Saree.jpg',
-            rating: 4.7,
-            reviews: 35
-        },
-        {
-            id: '18',
-            name: 'Purple Silk Saree',
-            category: 'sarees',
-            price: 12999,
-            description: 'Rich purple silk saree with elegant border work and comfortable drape. Perfect for evening gatherings.',
-            image: 'images/Purple Saree.jpg',
-            rating: 4.4,
-            reviews: 18
-        },
-        // Kurtis
-        {
-            id: '19',
-            name: 'Majestic Green Kurti',
-            category: 'kurtis',
-            price: 3499,
-            description: 'Majestic green kurti with contemporary design and comfortable fit. Perfect for daily wear and casual occasions.',
-            image: 'images/Majestic Green Kurti.jpg',
-            rating: 4.3,
-            reviews: 42
-        },
-        // Additional Kurtis
-        {
-            id: '20',
-            name: 'Sparking Yellow Kurti',
-            category: 'kurtis',
-            price: 2499,
-            description: 'Vibrant sparking yellow kurti with modern design and comfortable fit. Perfect for casual wear.',
-            image: 'images/Sparking yellow kurti .jpg',
-            rating: 4.2,
-            reviews: 15
-        },
-        {
-            id: '21',
-            name: 'Crimson Elegance Kurti',
-            category: 'kurtis',
-            price: 2999,
-            description: 'Crimson elegance kurti with sophisticated design and flattering silhouette. Ideal for casual and semi-formal occasions.',
-            image: 'images/Crimson Elegance kurti .jpg',
-            rating: 4.1,
-            reviews: 12
-        },
-        {
-            id: '22',
-            name: 'Lavender Kurti',
-            category: 'kurtis',
-            price: 1999,
-            description: 'Lavender kurti with soft tones and dreamy design. Perfect for casual wear and daily use.',
-            image: 'images/Lavender kurti .jpg',
-            rating: 4.0,
-            reviews: 19
-        },
-        {
-            id: '23',
-            name: 'Beige Sophistication Kurti',
-            category: 'kurtis',
-            price: 1799,
-            description: 'Beige sophistication kurti with elegant design and versatile style. Suitable for office wear and casual outings.',
-            image: 'images/Beige SophisticationKurti.jpg',
-            rating: 4.3,
-            reviews: 25
-        },
-        // Sample products with enhanced features
-        {
-            id: '24',
-            name: 'Royal Blue Lehenga Set',
-            category: 'lehengas',
-            price: 25999,
-            originalPrice: 32499,
-            discount: 20,
-            description: 'Stunning royal blue lehenga with intricate embroidery and matching accessories. Perfect for wedding celebrations.',
-            image: 'images/Lehenga Sapphire Royale.jpg',
-            rating: 4.9,
-            reviews: 45,
-            isNew: true,
-            sizes: ['XS', 'S', 'M', 'L', 'XL']
-        },
-        {
-            id: '25',
-            name: 'Emerald Silk Saree',
-            category: 'sarees',
-            price: 12999,
-            originalPrice: 15999,
-            discount: 19,
-            description: 'Elegant emerald silk saree with golden border work. Ideal for traditional ceremonies and festive occasions.',
-            image: 'images/Lavender Saree.jpg',
-            rating: 4.7,
-            reviews: 28,
-            sizes: ['Free Size']
-        },
-        {
-            id: '26',
-            name: 'Crimson Evening Gown',
-            category: 'dresses',
-            price: 18999,
-            description: 'Stunning crimson evening gown with sequin embellishments. Perfect for red carpet events and glamorous parties.',
-            image: 'images/Long Dress Deep Plum Stardust.jpg',
-            rating: 4.8,
-            reviews: 32,
-            isNew: true,
-            sizes: ['S', 'M', 'L', 'XL']
-        }
-    ];
+    
+    // Fetch products
+    appState.allProducts = await API.fetchProducts();
     appState.filterProducts();
 
     // Update cart UI
@@ -986,6 +723,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('JRP Courteries website initialized successfully');
 });
+
 // ===== ERROR HANDLING =====
 window.addEventListener('error', (e) => {
     console.error('Global error:', e.error);
