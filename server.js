@@ -13,6 +13,8 @@ app.use((req, res, next) => {
         res.setHeader('Content-Type', 'text/css');
     } else if (req.url.endsWith('.js')) {
         res.setHeader('Content-Type', 'application/javascript');
+    } else if (req.url.endsWith('.json')) { // This line is new
+        res.setHeader('Content-Type', 'application/json');
     }
     next();
 });
@@ -32,4 +34,3 @@ app.listen(PORT, () => {
     console.log(`📱 Open your browser and navigate to the URL above`);
     console.log(`✨ Enjoy your enhanced shopping experience!`);
 });
-
