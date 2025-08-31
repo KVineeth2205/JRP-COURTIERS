@@ -1,6 +1,6 @@
 {
   "beige_sophistication_kurti.jpg": {
-    "category": "kurti",
+    "category": "kurtis",
     "displayName": "Beige Sophistication Kurti",
     "description": "Comfortable and stylish ethnic wear for daily and casual occasions.",
     "suggestedPriceRange": { "min": 1799, "max": 8000 },
@@ -8,7 +8,7 @@
     "imageUrl": "https://i.ibb.co/1Y6QFFdZ/Beige-Sophistication-Kurti.jpg"
   },
   "bridal_collection_bottle_green_color_pure.jpg": {
-    "category": "saree",
+    "category": "sarees",
     "displayName": "Bridal Bottle Green Saree",
     "description": "Traditional Indian drape perfect for formal occasions and ceremonies.",
     "suggestedPriceRange": { "min": 22499, "max": 35000 },
@@ -16,7 +16,7 @@
     "imageUrl": "https://i.ibb.co/MypCRT6V/Bridal-Collection-Bottle-Green-Color-Pure.jpg"
   },
     "crimson_elegance_kurti.jpg": {
-    "category": "kurti",
+    "category": "kurtis",
     "displayName": "Crimson Elegance Kurti",
     "description": "Comfortable and stylish ethnic wear for daily and casual occasions.",
     "suggestedPriceRange": { "min": 2999, "max": 8000 },
@@ -24,7 +24,7 @@
     "imageUrl": "https://i.ibb.co/DD8gBFkr/Crimson-Elegance-kurti.jpg"
   },
   "lavender_kurti.jpg": {
-    "category": "kurti",
+    "category": "kurtis",
     "displayName": "Lavender Kurti",
     "description": "Comfortable and stylish ethnic wear for daily and casual occasions.",
     "suggestedPriceRange": { "min": 1999, "max": 8000 },
@@ -32,7 +32,7 @@
     "imageUrl": "https://i.ibb.co/PZnr1C3r/Lavender-kurti.jpg"
   },
   "lavender_saree.jpg": {
-    "category": "saree",
+    "category": "sarees",
     "displayName": "Lavender Saree",
     "description": "Traditional Indian drape perfect for formal occasions and ceremonies.",
     "suggestedPriceRange": { "min": 15999, "max": 35000 },
@@ -40,7 +40,7 @@
     "imageUrl": "https://i.ibb.co/GfRRxXkD/Lavender-Saree.jpg"
   },
     "lehenga_crimson_queen_anarkali.jpg": {
-    "category": "long-frock",
+    "category": "dresses",
     "displayName": "Lehenga Crimson Queen Anarkali",
     "description": "Flowing silhouettes perfect for special occasions.",
     "suggestedPriceRange": { "min": 27499, "max": 15000 },
@@ -48,7 +48,7 @@
     "imageUrl": "https://i.ibb.co/qMyKD3zF/Lehenga-Crimson-Queen-Anarkali.jpg"
   },
   "lehenga_golden_marigold_majesty.jpg": {
-    "category": "lehenga",
+    "category": "lehengas",
     "displayName": "Lehenga Golden Marigold Majesty",
     "description": "Traditional Indian ethnic wear perfect for weddings and celebrations.",
     "suggestedPriceRange": { "min": 32499, "max": 50000 },
@@ -56,7 +56,7 @@
     "imageUrl": "https://i.ibb.co/ycc2dQsn/Lehenga-Golden-Marigold-Majesty.jpg"
   },
   "lehenga_imperial_scarlet_majesty.jpg": {
-    "category": "lehenga",
+    "category": "lehengas",
     "displayName": "Lehenga Imperial Scarlet Majesty",
     "description": "Traditional Indian ethnic wear perfect for weddings and celebrations.",
     "suggestedPriceRange": { "min": 35999, "max": 50000 },
@@ -64,7 +64,7 @@
     "imageUrl": "https://i.ibb.co/8g4JgdyH/Lehenga-Imperial-Scarlet-Majesty.jpg"
   },
   "lehenga_royal_mocha_elegance.jpg": {
-    "category": "lehenga",
+    "category": "lehengas",
     "displayName": "Lehenga Royal Mocha Elegance",
     "description": "Traditional Indian ethnic wear perfect for weddings and celebrations.",
     "suggestedPriceRange": { "min": 29999, "max": 50000 },
@@ -72,7 +72,7 @@
     "imageUrl": "https://i.ibb.co/20BZhKmy/Lehenga-Royal-Mocha-Elegance.jpg"
   },
   "lehenga_sapphire_royale.jpg": {
-    "category": "lehenga",
+    "category": "lehengas",
     "displayName": "Lehenga Sapphire Royale",
     "description": "Traditional Indian ethnic wear perfect for weddings and celebrations.",
     "suggestedPriceRange": { "min": 28999, "max": 50000 },
@@ -80,7 +80,7 @@
     "imageUrl": "https://i.ibb.co/mCtCkGgL/Lehenga-Sapphire-Royale.jpg"
   },
   "lehenga_starry_maroon_bridal_glamour.jpg": {
-    "category": "lehenga",
+    "category": "lehengas",
     "displayName": "Lehenga Starry Maroon Bridal Glamour",
     "description": "Traditional Indian ethnic wear perfect for weddings and celebrations.",
     "suggestedPriceRange": { "min": 38999, "max": 50000 },
@@ -88,7 +88,7 @@
     "imageUrl": "https://i.ibb.co/0pz41DXJ/Lehenga-Starry-Maroon-Bridal-Glamour.jpg"
   },
   "long_dress_azure_enchantress.jpg": {
-    "category": "long-frock",
+    "category": "dresses",
     "displayName": "Long Dress Azure Enchantress",
     "description": "Flowing silhouettes perfect for special occasions.",
     "suggestedPriceRange": { "min": 17999, "max": 15000 },
@@ -96,7 +96,7 @@
     "imageUrl": "https://i.ibb.co/vCLcTdKY/Long-Dress-Azure-Enchantress.jpg"
   },
   "long_dress_blush_petals_reverie.jpg": {
-    "category": "long-frock",
+    "category": "dresses",
     "displayName": "Long Dress Blush Petals Reverie",
     "description": "Flowing silhouettes perfect for special occasions.",
     "suggestedPriceRange": { "min": 10999, "max": 15000 },
@@ -104,7 +104,7 @@
     "imageUrl": "https://i.ibb.co/kVc3dL6v/Long-Dress-Blush-Petals-Reverie.jpg"
   },
   "long_dress_celestial_grace.jpg": {
-    "category": "long-frock",
+    "category": "dresses",
     "displayName": "Long Dress Celestial Grace",
     "description": "Flowing silhouettes perfect for special occasions.",
     "suggestedPriceRange": { "min": 18999, "max": 15000 },
@@ -112,7 +112,7 @@
     "imageUrl": "https://i.ibb.co/Bd0WWh6/Long-Dress-Celestial-Grace.jpg"
   },
   "long_dress_deep_plum_stardust.jpg": {
-    "category": "long-frock",
+    "category": "dresses",
     "displayName": "Long Dress Deep Plum Stardust",
     "description": "Flowing silhouettes perfect for special occasions.",
     "suggestedPriceRange": { "min": 15999, "max": 15000 },
@@ -120,7 +120,7 @@
     "imageUrl": "https://i.ibb.co/JjLF08J9/Long-Dress-Deep-Plum-Stardust.jpg"
   },
   "long_dress_emerald_elegance.jpg": {
-    "category": "long-frock",
+    "category": "gowns",
     "displayName": "Long Dress Emerald Elegance",
     "description": "Flowing silhouettes perfect for special occasions.",
     "suggestedPriceRange": { "min": 8999, "max": 15000 },
@@ -128,7 +128,7 @@
     "imageUrl": "https://i.ibb.co/V0Q68t51/Long-Dress-Emerald-Elegance.jpg"
   },
   "long_dress_golden_sunshine_radiance.jpg": {
-    "category": "long-frock",
+    "category": "dresses",
     "displayName": "Long Dress Golden Sunshine Radiance",
     "description": "Flowing silhouettes perfect for special occasions.",
     "suggestedPriceRange": { "min": 11999, "max": 15000 },
@@ -136,7 +136,7 @@
     "imageUrl": "https://i.ibb.co/ycZPRcDX/Long-Dress-Golden-Sunshine-Radiance.jpg"
   },
   "long_dress_moonlit_wisteria.jpg": {
-    "category": "long-frock",
+    "category": "dresses",
     "displayName": "Long Dress Moonlit Wisteria",
     "description": "Flowing silhouettes perfect for special occasions.",
     "suggestedPriceRange": { "min": 12999, "max": 15000 },
@@ -144,7 +144,7 @@
     "imageUrl": "https://i.ibb.co/wZ57KCYm/Long-Dress-Moonlit-Wisteria.jpg"
   },
   "long_dress_rose_stardust.jpg": {
-    "category": "long-frock",
+    "category": "gowns",
     "displayName": "Long Dress Rosé Stardust",
     "description": "Flowing silhouettes perfect for special occasions.",
     "suggestedPriceRange": { "min": 14999, "max": 15000 },
@@ -152,7 +152,7 @@
     "imageUrl": "https://i.ibb.co/ymSpskqf/Long-Dress-Ros-Stardust.jpg"
   },
     "majestic_green_kurti.jpg": {
-    "category": "kurti",
+    "category": "kurtis",
     "displayName": "Majestic Green Kurti",
     "description": "Comfortable and stylish ethnic wear for daily and casual occasions.",
     "suggestedPriceRange": { "min": 3499, "max": 8000 },
@@ -160,7 +160,7 @@
     "imageUrl": "https://i.ibb.co/CpKZSG6M/Majestic-Green-Kurti.jpg"
   },
   "purple_saree.jpg": {
-    "category": "saree",
+    "category": "sarees",
     "displayName": "Purple Saree",
     "description": "Traditional Indian drape perfect for formal occasions and ceremonies.",
     "suggestedPriceRange": { "min": 12999, "max": 35000 },
@@ -168,7 +168,7 @@
     "imageUrl": "https://i.ibb.co/cKPMC4Cc/Purple-Saree.jpg"
   },
   "sparking_yellow_kurti.jpg": {
-    "category": "kurti",
+    "category": "kurtis",
     "displayName": "Sparking Yellow Kurti",
     "description": "Comfortable and stylish ethnic wear for daily and casual occasions.",
     "suggestedPriceRange": { "min": 2499, "max": 8000 },
@@ -176,7 +176,7 @@
     "imageUrl": "https://i.ibb.co/4wVxvZZK/Sparking-yellow-kurti.jpg"
   },
   "white_bridal_saree.jpg": {
-    "category": "saree",
+    "category": "sarees",
     "displayName": "White Bridal Saree",
     "description": "Traditional Indian drape perfect for formal occasions and ceremonies.",
     "suggestedPriceRange": { "min": 18999, "max": 35000 },
