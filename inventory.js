@@ -22,4 +22,5 @@
   "purple_saree.jpg": { "stock": 6 },
   "sparking_yellow_kurti.jpg": { "stock": 18 },
   "white_bridal_saree.jpg": { "stock": 3 }
+
 }
