@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JRP Courteries - Boutique Fashion</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,14 +20,13 @@
                 
                 <ul class="nav-links">
                     <li><a href="#home" class="nav-link active">Home</a></li>
-                    <li><a href="#arrivals" class="nav-link">New Arrivals</a></li>
                     <li><a href="#collections" class="nav-link">Collections</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
 
                 <div class="nav-actions">
                     <div class="search-container">
-                        <input type="text" placeholder="Search for your perfect outfit..." class="search-input" id="search-input">
+                        <input type="text" placeholder="Search..." class="search-input" id="search-input">
                         <i class="fas fa-search search-icon" id="search-icon"></i>
                     </div>
                     <div class="cart-container" id="cart-container">
@@ -41,17 +41,17 @@
         </header>
 
         <section class="hero" id="home">
-            <div class="hero-content">
+            <div class="hero-content" data-aos="fade-right">
                 <h2 class="hero-title">Discover Your Unique Story</h2>
                 <p class="hero-description">
-                    From traditional lehengas to contemporary evening wear, explore our curated collection of exquisite fashion that celebrates your individuality and timeless elegance.
+                    From traditional lehengas to contemporary evening wear, explore our curated collection of exquisite fashion.
                 </p>
-                <button class="cta-button" onclick="scrollToCollection()">
+                <button class="cta-button">
                     Explore Collection
                     <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
-            <div class="hero-visual">
+            <div class="hero-visual" data-aos="fade-left">
                 <div class="floating-card">
                     <i class="fas fa-gem"></i>
                     <span>Premium Quality</span>
@@ -68,12 +68,12 @@
         </section>
 
         <section class="product-section" id="collections">
-            <div class="section-header">
+            <div class="section-header" data-aos="fade-up">
                 <h3>Our Featured Collection</h3>
                 <p>Handpicked designs for the discerning fashion enthusiast</p>
             </div>
 
-            <div class="filter-controls">
+            <div class="filter-controls" data-aos="fade-up" data-aos-delay="100">
                 <div class="filter-group">
                     <label>Category:</label>
                     <div class="filter-buttons">
@@ -84,9 +84,7 @@
                         <button class="filter-btn" data-filter="gowns">Gowns</button>
                         <button class="filter-btn" data-filter="dresses">Dresses</button>
                         <button class="filter-btn" data-filter="dupattas">Dupattas</button>
-                        <button class="filter-btn" data-filter="jewelry">Jewelry</button>
                         <button class="filter-btn" data-filter="footwear">Footwear</button>
-                        <button class="filter-btn" data-filter="accessories">Accessories</button>
                     </div>
                 </div>
 
@@ -96,8 +94,6 @@
                         <option value="featured">Featured</option>
                         <option value="price-low">Price: Low to High</option>
                         <option value="price-high">Price: High to Low</option>
-                        <option value="newest">Newest First</option>
-                        <option value="popular">Most Popular</option>
                     </select>
                 </div>
             </div>
@@ -114,14 +110,11 @@
                 </button>
             </div>
             <div class="cart-items" id="cartItems">
-                <div class="empty-cart">
-                    <i class="fas fa-shopping-bag"></i>
-                    <p>Your cart is empty</p>
                 </div>
-            </div>
             <div class="cart-footer">
                 <div class="cart-total">
-                    <span>Total: ₹<span id="cartTotal">0.00</span></span>
+                    <span>Total:</span>
+                    <span id="cartTotal">₹0.00</span>
                 </div>
                 <button class="checkout-btn">Proceed to Checkout</button>
             </div>
@@ -161,11 +154,7 @@
 
     <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
-    <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
-        <div class="loading-spinner"></div>
-        <p>Loading...</p>
-    </div>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
