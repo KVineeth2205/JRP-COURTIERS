@@ -182,5 +182,85 @@
     "suggestedPriceRange": { "min": 18999, "max": 35000 },
     "tags": ["traditional", "formal", "bridal", "elegant", "ceremony"],
     "imageUrl": "https://i.ibb.co/bgwKW4vD/White-Bridal-Saree.jpg"
+  },
+  "wine_red_strappy_high_heels.jpg": {
+    "category": "footwear",
+    "displayName": "Wine Red Strappy High Heels",
+    "description": "Elegant and stylish heels for any special occasion.",
+    "suggestedPriceRange": { "min": 2999, "max": 7000 },
+    "tags": ["footwear", "heels", "stylish", "party-wear"],
+    "imageUrl": "https://i.ibb.co/F1DNs15/Wine-Red-Strappy-High-Heels.jpg"
+  },
+  "rose_suede_ankle_strap_heels.jpg": {
+    "category": "footwear",
+    "displayName": "Rose Suede Ankle Strap Heels",
+    "description": "Chic and comfortable suede heels with an ankle strap.",
+    "suggestedPriceRange": { "min": 3499, "max": 7500 },
+    "tags": ["footwear", "heels", "suede", "chic", "comfortable"],
+    "imageUrl": "https://i.ibb.co/6pjLyFs/Rose-Suede-Ankle-Strap-Heels.jpg"
+  },
+  "light_blue_lace_wedding_heels.jpg": {
+    "category": "footwear",
+    "displayName": "Light Blue Lace Wedding Heels",
+    "description": "Beautiful lace heels perfect for weddings and formal events.",
+    "suggestedPriceRange": { "min": 4500, "max": 8000 },
+    "tags": ["footwear", "heels", "lace", "wedding", "formal"],
+    "imageUrl": "https://i.ibb.co/bwjq1Q2/Light-Blue-Lace-Wedding-Heels.jpg"
+  },
+  "nude_bow_tie_block_heels.jpg": {
+    "category": "footwear",
+    "displayName": "Nude Bow-Tie Block Heels",
+    "description": "Versatile and cute nude block heels with a bow-tie detail.",
+    "suggestedPriceRange": { "min": 2899, "max": 6500 },
+    "tags": ["footwear", "heels", "block-heels", "cute", "versatile"],
+    "imageUrl": "https://i.ibb.co/0j3Z190H/Nude-Bow-Tie-Block-Heels.jpg"
+  },
+  "forest_green_scalloped_edge_heels.jpg": {
+    "category": "footwear",
+    "displayName": "Forest Green Scalloped-Edge Heels",
+    "description": "Unique forest green heels with a stylish scalloped edge.",
+    "suggestedPriceRange": { "min": 3200, "max": 7200 },
+    "tags": ["footwear", "heels", "unique", "stylish"],
+    "imageUrl": "https://i.ibb.co/LXThgm0f/Forest-Green-Scalloped-Edge-Heels.jpg"
+  },
+  "fuchsia_pink_banarasi_silk_dupatta.jpg": {
+    "category": "dupattas",
+    "displayName": "Fuchsia Pink Banarasi Silk Dupatta",
+    "description": "Vibrant Banarasi silk dupatta with rich gold Zari work.",
+    "suggestedPriceRange": { "min": 2500, "max": 6000 },
+    "tags": ["dupattas", "silk", "banarasi", "vibrant", "ethnic"],
+    "imageUrl": "https://i.ibb.co/0VBdWZKb/Fuchsia-Pink-Banarasi-Silk-Dupatta-with-Gold-Zari.jpg"
+  },
+  "navy_blue_patola_print_dupatta.jpg": {
+    "category": "dupattas",
+    "displayName": "Navy Blue Patola Print Dupatta",
+    "description": "Elegant Patola print dupatta with a contrasting red border.",
+    "suggestedPriceRange": { "min": 2200, "max": 5500 },
+    "tags": ["dupattas", "patola", "print", "elegant", "traditional"],
+    "imageUrl": "https://i.ibb.co/fVRvQt0r/Navy-Blue-Patola-Print-Dupatta-with-Red-Border.jpg"
+  },
+  "orange_kalamkari_dupatta.jpg": {
+    "category": "dupattas",
+    "displayName": "Orange Kalamkari Dupatta",
+    "description": "Artistic Kalamkari dupatta featuring mythological motifs.",
+    "suggestedPriceRange": { "min": 2800, "max": 6500 },
+    "tags": ["dupattas", "kalamkari", "artistic", "ethnic"],
+    "imageUrl": "https://i.ibb.co/v6fbQw8j/Orange-Kalamkari-Dupatta-with-Mythological-Motifs.jpg"
+  },
+  "purple_bandhani_dupatta.jpg": {
+    "category": "dupattas",
+    "displayName": "Purple Bandhani Dupatta",
+    "description": "Traditional purple Bandhani dupatta with a gold Zari border.",
+    "suggestedPriceRange": { "min": 2600, "max": 6200 },
+    "tags": ["dupattas", "bandhani", "traditional", "ethnic"],
+    "imageUrl": "https://i.ibb.co/d00hMDNQ/Purple-Bandhani-Dupatta-with-Gold-Zari-Border.jpg"
+  },
+  "kalamkari_print_dupatta_floral.jpg": {
+    "category": "dupattas",
+    "displayName": "Kalamkari Print Dupatta",
+    "description": "Beautiful Kalamkari print dupatta with delicate floral motifs.",
+    "suggestedPriceRange": { "min": 2400, "max": 5800 },
+    "tags": ["dupattas", "kalamkari", "floral", "ethnic"],
+    "imageUrl": "https://i.ibb.co/8nkfZzCz/Kalamkari-Print-Dupatta-with-Floral-Motifs.jpg"
   }
 }
