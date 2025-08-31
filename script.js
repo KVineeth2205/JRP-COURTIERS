@@ -1,15 +1,11 @@
 // ===== JRP COURTERIES - ENHANCED JAVASCRIPT =====
-// Modular, well-organized, and performant code
 
 // ===== CONFIGURATION =====
 const CONFIG = {
-    API_BASE_URL: '/api',
-    ITEMS_PER_PAGE: 12,
     CART_STORAGE_KEY: 'jrp_shopping_cart',
     THEME_STORAGE_KEY: 'jrp_theme',
     TOAST_DURATION: 3000,
     DEBOUNCE_DELAY: 300,
-    ANIMATION_DURATION: 300
 };
 
 // ===== STATE MANAGEMENT =====
@@ -18,15 +14,9 @@ class AppState {
         this.cart = [];
         this.allProducts = [];
         this.filteredProducts = [];
-        this.currentFilter = 'all';
-        this.currentPage = 1;
-        this.currentSort = 'featured';
-        this.isLoading = false;
-        this.searchQuery = '';
         this.theme = 'light';
     }
 
-    // Cart management
     addToCart(product, quantity = 1) {
         const existingItem = this.cart.find(item => item.id === product.id);
         if (existingItem) {
@@ -58,7 +48,7 @@ class AppState {
     }
 
     getCartTotal() {
-        return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        return this.cart.reduce((total, item) => total + (item.suggestedPriceRange.min * item.quantity), 0);
     }
 
     getCartCount() {
@@ -66,25 +56,14 @@ class AppState {
     }
 
     saveCart() {
-        try {
-            localStorage.setItem(CONFIG.CART_STORAGE_KEY, JSON.stringify(this.cart));
-        } catch (error) {
-            console.error('Error saving cart:', error);
-            UI.showToast('Error saving cart', 'error');
-        }
+        localStorage.setItem(CONFIG.CART_STORAGE_KEY, JSON.stringify(this.cart));
     }
 
     loadCart() {
-        try {
-            const savedCart = localStorage.getItem(CONFIG.CART_STORAGE_KEY);
-            this.cart = savedCart ? JSON.parse(savedCart) : [];
-        } catch (error) {
-            console.error('Error loading cart:', error);
-            this.cart = [];
-        }
+        const savedCart = localStorage.getItem(CONFIG.CART_STORAGE_KEY);
+        this.cart = savedCart ? JSON.parse(savedCart) : [];
     }
 
-    // Theme management
     toggleTheme() {
         this.theme = this.theme === 'light' ? 'dark' : 'light';
         localStorage.setItem(CONFIG.THEME_STORAGE_KEY, this.theme);
@@ -97,41 +76,21 @@ class AppState {
         UI.applyTheme(this.theme);
     }
 
-    // Product filtering and sorting
-    filterProducts(category = 'all') {
-        this.currentFilter = category;
-        this.currentPage = 1;
-        if (category === 'all') {
-            this.filteredProducts = [...this.allProducts];
-        } else {
-            this.filteredProducts = this.allProducts.filter(product => product.category === category);
+    filterAndSortProducts(filter = 'all', sort = 'featured') {
+        let products = [...this.allProducts];
+
+        if (filter !== 'all') {
+            products = products.filter(product => product.category === filter);
         }
-        this.sortProducts();
-        UI.renderProducts(this.filteredProducts);
-    }
-
-    searchProducts(query) {
-        this.searchQuery = query.toLowerCase();
-        this.currentPage = 1;
-        if (!query.trim()) {
-            this.filterProducts(this.currentFilter);
-            return;
+        
+        if (sort === 'price-low') {
+            products.sort((a, b) => a.suggestedPriceRange.min - b.suggestedPriceRange.min);
+        } else if (sort === 'price-high') {
+            products.sort((a, b) => b.suggestedPriceRange.min - a.suggestedPriceRange.min);
         }
-        this.filteredProducts = this.allProducts.filter(product =>
-            product.name.toLowerCase().includes(this.searchQuery) ||
-            product.category.toLowerCase().includes(this.searchQuery) ||
-            product.description.toLowerCase().includes(this.searchQuery)
-        );
-        this.sortProducts();
+
+        this.filteredProducts = products;
         UI.renderProducts(this.filteredProducts);
-    }
-
-    sortProducts() {
-        // Sort logic remains the same
-    }
-
-    setSort(sortType) {
-        // Set sort logic remains the same
     }
 }
 
@@ -144,7 +103,6 @@ class UI {
             productGrid: document.getElementById('productGrid'),
             cartCount: document.getElementById('cart-count'),
             cartTotal: document.getElementById('cartTotal'),
-            toast: document.getElementById('toast'),
             cartSidebar: document.getElementById('cartSidebar'),
             cartItems: document.getElementById('cartItems'),
             searchInput: document.getElementById('search-input'),
@@ -155,78 +113,152 @@ class UI {
             sortSelect: document.getElementById('sort-select'),
             cartBtn: document.getElementById('cart-container'),
             closeCartBtn: document.getElementById('close-cart-btn'),
-            loadingOverlay: document.getElementById('loadingOverlay'),
-            overlay: document.getElementById('overlay')
+            overlay: document.getElementById('overlay'),
+            toast: document.getElementById('toast'),
+            ctaButton: document.querySelector('.cta-button'),
         };
         this.setupEventListeners();
     }
 
     static setupEventListeners() {
-        // Theme switcher
         this.elements.themeSwitcher?.addEventListener('click', () => appState.toggleTheme());
-
-        // Cart functionality
         this.elements.cartBtn?.addEventListener('click', () => this.toggleCartSidebar(true));
         this.elements.closeCartBtn?.addEventListener('click', () => this.toggleCartSidebar(false));
         this.elements.overlay?.addEventListener('click', () => this.toggleCartSidebar(false));
-
-        // Search functionality
-        this.elements.searchInput?.addEventListener('input', debounce(e => appState.searchProducts(e.target.value), CONFIG.DEBOUNCE_DELAY));
         this.elements.searchIcon?.addEventListener('click', () => this.elements.searchInput.focus());
+        this.elements.ctaButton?.addEventListener('click', () => document.getElementById('collections').scrollIntoView({ behavior: 'smooth' }));
 
-        // Filter buttons
         this.elements.filterButtons.forEach(btn => {
-            btn.addEventListener('click', e => {
+            btn.addEventListener('click', (e) => {
                 const filter = e.target.dataset.filter;
                 this.updateFilterButtons(filter);
-                appState.filterProducts(filter);
+                appState.filterAndSortProducts(filter, this.elements.sortSelect.value);
             });
         });
 
-        // Header scroll effect
+        this.elements.sortSelect.addEventListener('change', (e) => {
+            const sort = e.target.value;
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            appState.filterAndSortProducts(activeFilter, sort);
+        });
+
         window.addEventListener('scroll', throttle(() => {
-            if (window.scrollY > 50) {
-                this.elements.header?.classList.add('scrolled');
-            } else {
-                this.elements.header?.classList.remove('scrolled');
-            }
+            this.elements.header?.classList.toggle('scrolled', window.scrollY > 50);
         }, 100));
     }
 
     static applyTheme(theme) {
         document.body.classList.toggle('dark-mode', theme === 'dark');
-        if (this.elements.themeSwitcher) {
-            this.elements.themeSwitcher.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        }
+        this.elements.themeSwitcher.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     }
 
     static toggleCartSidebar(open) {
-        const isOpen = this.elements.cartSidebar.classList.contains('open');
-        if (open === isOpen) return;
+        document.body.classList.toggle('cart-open', open);
+        this.elements.cartSidebar.classList.toggle('open', open);
+    }
 
-        if (open) {
-            this.elements.cartSidebar.classList.add('open');
-            document.body.classList.add('cart-open');
-        } else {
-            this.elements.cartSidebar.classList.remove('open');
-            document.body.classList.remove('cart-open');
+    static renderProducts(products) {
+        this.elements.productGrid.innerHTML = products.map(p => this.createProductCard(p)).join('');
+        this.setupProductCardListeners();
+    }
+
+    static createProductCard(product) {
+        return `
+            <div class="product-card" data-aos="fade-up" data-product-id="${product.id}">
+                <div class="product-image">
+                    <img src="${product.imageUrl}" alt="${product.displayName}" loading="lazy">
+                    <div class="product-overlay">
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">${product.category}</p>
+                    <h4>${product.displayName}</h4>
+                    <p class="product-price">₹${product.suggestedPriceRange.min.toLocaleString()}</p>
+                </div>
+            </div>`;
+    }
+
+    static setupProductCardListeners() {
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const productId = e.target.closest('.product-card').dataset.productId;
+                const product = appState.allProducts.find(p => p.id === productId);
+                if (product) {
+                    appState.addToCart(product);
+                    this.showToast(`${product.displayName} added to cart!`);
+                }
+            });
+        });
+    }
+
+    static updateCartUI() {
+        this.elements.cartCount.textContent = appState.getCartCount();
+        this.elements.cartTotal.textContent = `₹${appState.getCartTotal().toLocaleString()}`;
+        this.renderCartItems();
+    }
+
+    static renderCartItems() {
+        if (appState.cart.length === 0) {
+            this.elements.cartItems.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div>`;
+            return;
         }
+        this.elements.cartItems.innerHTML = appState.cart.map(item => this.createCartItemHTML(item)).join('');
+        this.setupCartItemListeners();
     }
     
-    // All other UI methods like renderProducts, showToast, etc., remain the same.
-    // ... [ The rest of the UI class methods from the previous step go here ] ...
-    static showToast(message, type = 'success') { if (!this.elements.toast) return; this.elements.toast.textContent = message; this.elements.toast.className = `toast show ${type}`; setTimeout(() => { this.elements.toast.classList.remove('show'); }, CONFIG.TOAST_DURATION); }
-    static renderProducts(products) { if (!this.elements.productGrid) return; if (products.length === 0) { this.elements.productGrid.innerHTML = `<p>No products found.</p>`; return; } const productsHTML = products.map(p => this.createProductCard(p)).join(''); this.elements.productGrid.innerHTML = productsHTML; this.setupProductCardListeners(); }
-    static createProductCard(product) { return `<article class="product-card" data-product-id="${product.id}"><div class="product-image"><img src="${product.imageUrl}" alt="${product.name}" loading="lazy"><div class="product-overlay"><button class="quick-view-btn"><i class="fas fa-eye"></i></button><button class="add-to-cart-btn"><i class="fas fa-plus"></i></button></div></div><div class="product-info"><h4>${product.displayName}</h4><p class="product-price">₹${product.suggestedPriceRange.min.toLocaleString()}</p></div></article>`; }
-    static setupProductCardListeners() { document.querySelectorAll('.add-to-cart-btn').forEach(btn => { btn.addEventListener('click', e => { const productId = e.target.closest('.product-card').dataset.productId; const product = appState.allProducts.find(p => p.id === productId); if (product) { appState.addToCart(product); this.showToast(`${product.name} added to cart!`); } }); }); }
-    static updateCartUI() { if (this.elements.cartCount) { this.elements.cartCount.textContent = appState.getCartCount(); } if (this.elements.cartTotal) { this.elements.cartTotal.textContent = `${appState.getCartTotal().toLocaleString()}`; } this.renderCartItems(); }
-    static renderCartItems() { if (!this.elements.cartItems) return; if (appState.cart.length === 0) { this.elements.cartItems.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div>`; return; } this.elements.cartItems.innerHTML = appState.cart.map(item => `<div class="cart-item" data-product-id="${item.id}"><img src="${item.imageUrl}" alt="${item.name}" class="cart-item-image"> ... </div>`).join(''); }
-    static updateFilterButtons(activeFilter) { this.elements.filterButtons.forEach(btn => { btn.classList.toggle('active', btn.dataset.filter === activeFilter); }); }
+    static createCartItemHTML(item) {
+        return `
+            <div class="cart-item" data-product-id="${item.id}">
+                <img src="${item.imageUrl}" alt="${item.displayName}" class="cart-item-image">
+                <div class="cart-item-details">
+                    <h4>${item.displayName}</h4>
+                    <p class="cart-item-price">₹${item.suggestedPriceRange.min.toLocaleString()}</p>
+                </div>
+                <div class="cart-item-controls">
+                    <button class="quantity-btn minus">-</button>
+                    <span>${item.quantity}</span>
+                    <button class="quantity-btn plus">+</button>
+                    <button class="remove-item-btn"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>`;
+    }
+
+    static setupCartItemListeners() {
+        this.elements.cartItems.querySelectorAll('.cart-item').forEach(itemEl => {
+            const productId = itemEl.dataset.productId;
+            itemEl.querySelector('.plus').addEventListener('click', () => {
+                const item = appState.cart.find(i => i.id === productId);
+                appState.updateCartItemQuantity(productId, item.quantity + 1);
+            });
+            itemEl.querySelector('.minus').addEventListener('click', () => {
+                const item = appState.cart.find(i => i.id === productId);
+                appState.updateCartItemQuantity(productId, item.quantity - 1);
+            });
+            itemEl.querySelector('.remove-item-btn').addEventListener('click', () => {
+                appState.removeFromCart(productId);
+            });
+        });
+    }
+
+    static showToast(message) {
+        this.elements.toast.textContent = message;
+        this.elements.toast.classList.add('show');
+        setTimeout(() => this.elements.toast.classList.remove('show'), CONFIG.TOAST_DURATION);
+    }
+    
+    static updateFilterButtons(activeFilter) {
+        this.elements.filterButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.filter === activeFilter);
+        });
+    }
 }
 
-// ===== API MANAGEMENT =====
-class API {
-    static async fetchProducts() {
+// ===== API & UTILITIES =====
+const API = {
+    fetchProducts: async () => {
         try {
             const response = await fetch('image-categories.json');
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -234,30 +266,31 @@ class API {
             return Object.entries(categories).map(([id, data]) => ({ id, ...data }));
         } catch (error) {
             console.error('Error fetching products:', error);
-            UI.showToast('Error loading products.', 'error');
+            UI.showToast('Error loading products.');
             return [];
         }
     }
-}
-
-// ===== UTILITY FUNCTIONS =====
-function debounce(func, wait) { let timeout; return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), wait); }; }
-function throttle(func, limit) { let inThrottle; return function(...args) { if (!inThrottle) { func.apply(this, args); inThrottle = true; setTimeout(() => inThrottle = false, limit); } }; }
-function scrollToCollection() { document.getElementById('collections').scrollIntoView({ behavior: 'smooth' }); }
+};
+const throttle = (func, limit) => { let inThrottle; return (...args) => { if (!inThrottle) { func(...args); inThrottle = true; setTimeout(() => inThrottle = false, limit); } } };
+const debounce = (func, delay) => { let timeout; return (...args) => { clearTimeout(timeout); timeout = setTimeout(() => func(...args), delay); } };
 
 // ===== INITIALIZATION =====
 let appState;
-
 document.addEventListener('DOMContentLoaded', async () => {
     appState = new AppState();
     appState.loadCart();
-    appState.loadTheme(); // Load theme on start
+    appState.loadTheme();
 
     UI.initialize();
     
     appState.allProducts = await API.fetchProducts();
-    appState.filterProducts();
+    appState.filterAndSortProducts();
 
     UI.updateCartUI();
-    console.log('JRP Courteries website initialized successfully');
+
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50,
+    });
 });
