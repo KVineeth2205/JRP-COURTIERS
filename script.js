@@ -115,7 +115,8 @@ class UI {
             closeCartBtn: document.getElementById('close-cart-btn'),
             overlay: document.getElementById('overlay'),
             toast: document.getElementById('toast'),
-            ctaButton: document.querySelector('.cta-button')
+            ctaButton: document.querySelector('.cta-button'),
+            navLinks: document.querySelectorAll('.nav-link')
         };
         this.setupEventListeners();
     }
@@ -140,6 +141,19 @@ class UI {
             const sort = e.target.value;
             const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
             appState.filterAndSortProducts(activeFilter, sort);
+        });
+        
+        this.elements.navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = e.currentTarget.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                this.elements.navLinks.forEach(l => l.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+            });
         });
 
         window.addEventListener('scroll', throttle(() => {
