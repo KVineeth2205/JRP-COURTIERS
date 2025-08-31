@@ -133,7 +133,11 @@ class UI {
             overlay: document.getElementById('overlay'),
             toast: document.getElementById('toast'),
             ctaButton: document.querySelector('.cta-button'),
-            navLinks: document.querySelectorAll('.nav-link')
+            navLinks: document.querySelectorAll('.nav-link'),
+            quickViewModal: document.getElementById('quick-view-modal'),
+            quickViewBody: document.getElementById('quick-view-body'),
+            closeModalBtn: document.getElementById('close-modal-btn'),
+            backToTopBtn: document.getElementById('back-to-top-btn')
         };
         this.setupEventListeners();
     }
@@ -142,7 +146,10 @@ class UI {
         this.elements.themeSwitcher?.addEventListener('click', () => appState.toggleTheme());
         this.elements.cartBtn?.addEventListener('click', () => this.toggleCartSidebar(true));
         this.elements.closeCartBtn?.addEventListener('click', () => this.toggleCartSidebar(false));
-        this.elements.overlay?.addEventListener('click', () => this.toggleCartSidebar(false));
+        this.elements.overlay?.addEventListener('click', () => {
+            this.toggleCartSidebar(false);
+            this.toggleQuickViewModal(false);
+        });
         this.elements.searchIcon?.addEventListener('click', () => this.elements.searchInput.focus());
         this.elements.ctaButton?.addEventListener('click', () => document.getElementById('collections').scrollIntoView({ behavior: 'smooth' }));
 
@@ -173,8 +180,14 @@ class UI {
             });
         });
 
+        this.elements.closeModalBtn?.addEventListener('click', () => this.toggleQuickViewModal(false));
+        this.elements.backToTopBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
         window.addEventListener('scroll', throttle(() => {
             this.elements.header?.classList.toggle('scrolled', window.scrollY > 50);
+            if (this.elements.backToTopBtn) {
+                this.elements.backToTopBtn.style.display = window.scrollY > 200 ? 'block' : 'none';
+            }
         }, 100));
     }
 
@@ -206,9 +219,7 @@ class UI {
                     <img src="${product.imageUrl}" alt="${product.displayName}" loading="lazy">
                     ${isSoldOut ? '<div class="sold-out-overlay">Sold Out</div>' : ''}
                     <div class="product-overlay">
-                        <button class="add-to-cart-btn" ${isSoldOut ? 'disabled' : ''}>
-                            <i class="fas fa-plus"></i> Add to Cart
-                        </button>
+                        <button class="quick-view-btn"><i class="fas fa-eye"></i> Quick View</button>
                     </div>
                 </div>
                 <div class="product-info">
@@ -220,17 +231,50 @@ class UI {
     }
 
     static setupProductCardListeners() {
-        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        document.querySelectorAll('.quick-view-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const productId = e.target.closest('.product-card').dataset.productId;
                 const product = appState.allProducts.find(p => p.id === productId);
                 if (product) {
-                    appState.addToCart(product);
-                    this.showToast(`${product.displayName} added to cart!`);
+                    this.populateAndShowQuickView(product);
                 }
             });
         });
     }
+
+    static populateAndShowQuickView(product) {
+        const stock = appState.inventory[product.id]?.stock || 0;
+        const isSoldOut = stock === 0;
+
+        this.elements.quickViewBody.innerHTML = `
+            <div class="quick-view-content">
+                <div class="quick-view-image">
+                    <img src="${product.imageUrl}" alt="${product.displayName}">
+                </div>
+                <div class="quick-view-details">
+                    <h3>${product.displayName}</h3>
+                    <p class="product-price">₹${product.suggestedPriceRange.min.toLocaleString()}</p>
+                    <p class="product-description">${product.description}</p>
+                    <button class="add-to-cart-btn" ${isSoldOut ? 'disabled' : ''}>
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
+
+        this.elements.quickViewBody.querySelector('.add-to-cart-btn').addEventListener('click', () => {
+            appState.addToCart(product);
+            this.showToast(`${product.displayName} added to cart!`);
+            this.toggleQuickViewModal(false);
+        });
+
+        this.toggleQuickViewModal(true);
+    }
+
+    static toggleQuickViewModal(open) {
+        this.elements.quickViewModal.classList.toggle('open', open);
+    }
+
 
     static updateCartUI() {
         if (this.elements.cartCount) {
