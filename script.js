@@ -13,17 +13,29 @@ class AppState {
     constructor() {
         this.cart = [];
         this.allProducts = [];
+        this.inventory = {};
         this.filteredProducts = [];
         this.theme = 'light';
     }
 
     addToCart(product, quantity = 1) {
+        const stock = this.inventory[product.id]?.stock || 0;
+        if (stock < quantity) {
+            UI.showToast('Not enough stock!');
+            return;
+        }
+
         const existingItem = this.cart.find(item => item.id === product.id);
         if (existingItem) {
+            if (stock < existingItem.quantity + quantity) {
+                UI.showToast('Not enough stock!');
+                return;
+            }
             existingItem.quantity += quantity;
         } else {
             this.cart.push({ ...product, quantity });
         }
+
         this.saveCart();
         UI.updateCartUI();
     }
@@ -40,6 +52,11 @@ class AppState {
             if (quantity <= 0) {
                 this.removeFromCart(productId);
             } else {
+                const stock = this.inventory[productId]?.stock || 0;
+                if (stock < quantity) {
+                    UI.showToast('Not enough stock!');
+                    return;
+                }
                 item.quantity = quantity;
                 this.saveCart();
                 UI.updateCartUI();
@@ -180,12 +197,16 @@ class UI {
     }
 
     static createProductCard(product) {
+        const stock = appState.inventory[product.id]?.stock || 0;
+        const isSoldOut = stock === 0;
+
         return `
-            <div class="product-card" data-aos="fade-up" data-product-id="${product.id}">
+            <div class="product-card ${isSoldOut ? 'sold-out' : ''}" data-aos="fade-up" data-product-id="${product.id}">
                 <div class="product-image">
                     <img src="${product.imageUrl}" alt="${product.displayName}" loading="lazy">
+                    ${isSoldOut ? '<div class="sold-out-overlay">Sold Out</div>' : ''}
                     <div class="product-overlay">
-                        <button class="add-to-cart-btn">
+                        <button class="add-to-cart-btn" ${isSoldOut ? 'disabled' : ''}>
                             <i class="fas fa-plus"></i> Add to Cart
                         </button>
                     </div>
@@ -292,6 +313,17 @@ const API = {
             UI.showToast('Error loading products.');
             return [];
         }
+    },
+    fetchInventory: async () => {
+        try {
+            const response = await fetch('inventory.json');
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching inventory:', error);
+            UI.showToast('Error loading stock levels.');
+            return {};
+        }
     }
 };
 const throttle = (func, limit) => { let inThrottle; return (...args) => { if (!inThrottle) { func(...args); inThrottle = true; setTimeout(() => inThrottle = false, limit); } } };
@@ -307,6 +339,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     UI.initialize();
     
     appState.allProducts = await API.fetchProducts();
+    appState.inventory = await API.fetchInventory();
     appState.filterAndSortProducts();
 
     UI.updateCartUI();
