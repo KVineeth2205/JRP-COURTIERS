@@ -10,8 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- Navigation Header -->
-        <header class="header">
+        <header class="header" id="site-header">
             <nav class="navbar">
                 <div class="nav-brand">
                     <h1 class="logo">JRP COURTERIES</h1>
@@ -28,17 +27,19 @@
                 <div class="nav-actions">
                     <div class="search-container">
                         <input type="text" placeholder="Search for your perfect outfit..." class="search-input" id="search-input">
-                        <i class="fas fa-search search-icon"></i>
+                        <i class="fas fa-search search-icon" id="search-icon"></i>
                     </div>
-                    <div class="cart-container" id="cart-container" onclick="toggleCart()">
+                    <div class="cart-container" id="cart-container">
                         <i class="fas fa-shopping-bag cart-icon"></i>
                         <span class="cart-count" id="cart-count">0</span>
                     </div>
+                    <button class="theme-switcher" id="theme-switcher" aria-label="Toggle Theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
                 </div>
             </nav>
         </header>
 
-        <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="hero-content">
                 <h2 class="hero-title">Discover Your Unique Story</h2>
@@ -66,14 +67,12 @@
             </div>
         </section>
 
-        <!-- Product Filter Section -->
         <section class="product-section" id="collections">
             <div class="section-header">
                 <h3>Our Featured Collection</h3>
                 <p>Handpicked designs for the discerning fashion enthusiast</p>
             </div>
 
-            <!-- Enhanced Filter Controls -->
             <div class="filter-controls">
                 <div class="filter-group">
                     <label>Category:</label>
@@ -103,142 +102,14 @@
                 </div>
             </div>
 
-            <!-- Product Grid -->
             <div class="product-grid" id="productGrid">
-                <!-- Sample product cards -->
-                <div class="product-card" data-category="lehengas">
-                    <div class="product-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-image"></i>
-                            <span>Elegant Lehenga</span>
-                        </div>
-                        <div class="product-overlay">
-                            <button class="quick-view-btn">
-                                <i class="fas fa-eye"></i>
-                                Quick View
-                            </button>
-                            <button class="add-to-cart-btn">
-                                <i class="fas fa-plus"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h4>Traditional Silk Lehenga</h4>
-                        <p class="product-price">₹12,999</p>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(24 reviews)</span>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Add more sample products -->
-                <div class="product-card" data-category="kurtis">
-                    <div class="product-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-image"></i>
-                            <span>Designer Kurti</span>
-                        </div>
-                        <div class="product-overlay">
-                            <button class="quick-view-btn">
-                                <i class="fas fa-eye"></i>
-                                Quick View
-                            </button>
-                            <button class="add-to-cart-btn">
-                                <i class="fas fa-plus"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h4>Embroidered Cotton Kurti</h4>
-                        <p class="product-price">₹2,499</p>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>(18 reviews)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- More product cards -->
-                <div class="product-card" data-category="dresses">
-                    <div class="product-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-image"></i>
-                            <span>Evening Dress</span>
-                        </div>
-                        <div class="product-overlay">
-                            <button class="quick-view-btn">
-                                <i class="fas fa-eye"></i>
-                                Quick View
-                            </button>
-                            <button class="add-to-cart-btn">
-                                <i class="fas fa-plus"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h4>Elegant Evening Gown</h4>
-                        <p class="product-price">₹8,999</p>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>(32 reviews)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="sarees">
-                    <div class="product-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-image"></i>
-                            <span>Silk Saree</span>
-                        </div>
-                        <div class="product-overlay">
-                            <button class="quick-view-btn">
-                                <i class="fas fa-eye"></i>
-                                Quick View
-                            </button>
-                            <button class="add-to-cart-btn">
-                                <i class="fas fa-plus"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h4>Banarasi Silk Saree</h4>
-                        <p class="product-price">₹15,999</p>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>(28 reviews)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
 
-        <!-- Shopping Cart Sidebar -->
         <div class="cart-sidebar" id="cartSidebar">
             <div class="cart-header">
                 <h3>Your Shopping Cart</h3>
-                <button class="close-cart" onclick="toggleCart()">
+                <button class="close-cart" id="close-cart-btn">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -255,15 +126,41 @@
                 <button class="checkout-btn">Proceed to Checkout</button>
             </div>
         </div>
+        
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h1 class="logo">JRP COURTERIES</h1>
+                    <p>Celebrating timeless elegance and modern grace since 2024.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#collections">Collections</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 JRP Courteries. All Rights Reserved.</p>
+            </div>
+        </footer>
 
-        <!-- Overlay for cart -->
-        <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+        <div class="overlay" id="overlay"></div>
     </div>
 
-    <!-- Toast Notifications -->
     <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
-    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
         <div class="loading-spinner"></div>
         <p>Loading...</p>
